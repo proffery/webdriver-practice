@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import waits.CustomConditions;
 import java.time.Duration;
 
-public class PastebinHomePage extends PastebinAbstractPage {
+public class PricingCalculatorPage extends AbstractPage {
     private static final String HOMEPAGE_URL = "https://pastebin.com";
 
     @FindBy(id = "postform-text")
@@ -30,18 +30,19 @@ public class PastebinHomePage extends PastebinAbstractPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement submitButton;
 
-    public PastebinHomePage(WebDriver driver) {
+    public PricingCalculatorPage(WebDriver driver) {
         super(driver);
     }
 
-    public PastebinHomePage openPage() {
+    public PricingCalculatorPage openPage() {
         driver.get(HOMEPAGE_URL);
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(CustomConditions.jQueryAJAXsCompleted());
         return this;
     }
 
-    public PastebinSavePastePage savePaste(String pasteCode, String pasteTitleName) {
+    public SearchResultsPage savePaste(String pasteCode, String pasteTitleName) {
+
         codeArea.sendKeys(pasteCode);
         syntaxContainer.click();
         bashButton.click();
@@ -57,6 +58,6 @@ public class PastebinHomePage extends PastebinAbstractPage {
             e.printStackTrace();
         }
 
-        return new PastebinSavePastePage(driver);
+        return new SearchResultsPage(driver);
     }
 }

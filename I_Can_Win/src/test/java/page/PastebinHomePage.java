@@ -1,9 +1,12 @@
 package page;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import test.CustomConditions;
+import waits.CustomConditions;
 import java.time.Duration;
+
+import static waits.CustomConditions.waitForElementLocatedBy;
 
 public class PastebinHomePage {
     private WebDriver driver;
@@ -14,13 +17,23 @@ public class PastebinHomePage {
         PageFactory.initElements(driver, this);
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
     public PastebinHomePage openPage() {
         driver.get(HOMEPAGE_URL);
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(CustomConditions.jQueryAJAXsCompleted());
+        return this;
+    }
+    public PastebinHomePage createNewPaste(String pasteText, String pasteName) {
+        waitForElementLocatedBy(driver, By.id("postform-text"))
+                .sendKeys(pasteText);
+        waitForElementLocatedBy(driver, By.id("select2-postform-expiration-container"))
+                .click();
+        waitForElementLocatedBy(driver, By.xpath("/html/body/span[2]/span/span[2]/ul/li[3]"))
+                .click();
+        waitForElementLocatedBy(driver, By.id("postform-name"))
+                .sendKeys(pasteName);
+        waitForElementLocatedBy(driver, By.xpath("//*[@id=\"w0\"]/div[5]/div[1]/div[10]/button"))
+                .click();
         return this;
     }
     public void browserTearDown() {
