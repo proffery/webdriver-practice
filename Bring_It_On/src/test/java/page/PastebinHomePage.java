@@ -2,6 +2,7 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import waits.CustomConditions;
 import java.time.Duration;
@@ -42,6 +43,9 @@ public class PastebinHomePage extends PastebinAbstractPage {
     }
 
     public PastebinSavePastePage savePaste(String pasteCode, String pasteTitleName) {
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(codeArea));
+
         codeArea.sendKeys(pasteCode);
         syntaxContainer.click();
         bashButton.click();
@@ -49,13 +53,6 @@ public class PastebinHomePage extends PastebinAbstractPage {
         tenMinButton.click();
         pasteName.sendKeys(pasteTitleName);
         submitButton.click();
-
-        try {
-            Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         return new PastebinSavePastePage(driver);
     }
