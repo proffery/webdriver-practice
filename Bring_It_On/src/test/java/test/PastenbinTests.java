@@ -1,6 +1,7 @@
 package test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -17,7 +18,7 @@ public class PastenbinTests {
 
     @BeforeSuite
     public void browserSetup() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
     }
 
     @Test (priority = 1)
