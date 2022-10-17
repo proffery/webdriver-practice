@@ -1,63 +1,73 @@
 package page;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import waits.CustomConditions;
+
 import java.time.Duration;
 
 public class PricingCalculatorPage extends AbstractPage {
-    private static final String HOMEPAGE_URL = "https://pastebin.com";
+    @FindBy(xpath = "//iframe[@id='myFrame']")
+    private WebElement outerFrame;
 
-    @FindBy(id = "postform-text")
-    private WebElement codeArea;
+    @FindBy(css = ".devsite-wrapper")
+    private WebElement outerFrame1;
 
-    @FindBy(xpath = "//*[@id=\"w0\"]/div[5]/div[1]/div[3]/div/span/span[1]/span/span[2]")
-    private WebElement syntaxContainer;
+    @FindBy(css = "#gc-wrapper>main")
+    private WebElement outerFrame2;
 
-    @FindBy(xpath = "/html/body/span[2]/span/span[2]/ul/li[2]/ul/li[1]")
-    private WebElement bashButton;
+    @FindBy(xpath = "//descendant::md-tab-item[@class='md-tab ng-scope ng-isolate-scope md-ink-ripple md-active']")
+    private WebElement computeEngineButton;
 
-    @FindBy(id = "select2-postform-expiration-container")
-    private WebElement expContainer;
+    @FindBy(xpath = "//iframe[@id='myFrame']")
+    private WebElement mainFrame;
 
-    @FindBy(xpath = "/html/body/span[2]/span/span[2]/ul/li[3]")
-    private WebElement tenMinButton;
-
-    @FindBy(id = "postform-name")
-    private WebElement pasteName;
-
-    @FindBy(xpath = "//button[@type='submit']")
-    private WebElement submitButton;
+    @FindBy(xpath = "//form[@name='ComputeEngineForm']")
+    private WebElement computerEngineFrame;
+    @FindBy(css = "input[ng-model='listingCtrl.computeServer.quantity']")
+    private WebElement numberOfInstances;
 
     public PricingCalculatorPage(WebDriver driver) {
         super(driver);
     }
 
-    public PricingCalculatorPage openPage() {
-        driver.get(HOMEPAGE_URL);
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(CustomConditions.jQueryAJAXsCompleted());
-        return this;
+    @Override
+    protected AbstractPage openPage() {
+        throw new RuntimeException();
     }
 
-    public SearchResultsPage savePaste(String pasteCode, String pasteTitleName) {
+    public PricingCalculatorPage fillCalcForm(String instances) {
+//        new FluentWait<>(driver)
+//                .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+//                .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))
+//                .ignoring(NoSuchElementException.class);
+//
+//        new FluentWait<>(driver.switchTo().frame(0))
+//                .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+//                .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))
+//                .ignoring(NoSuchElementException.class);
+//
+//        new FluentWait<>(driver.switchTo().frame(outerFrame2))
+//                .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+//                .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))
+//                .ignoring(NoSuchElementException.class);
 
-        codeArea.sendKeys(pasteCode);
-        syntaxContainer.click();
-        bashButton.click();
-        expContainer.click();
-        tenMinButton.click();
-        pasteName.sendKeys(pasteTitleName);
-        submitButton.click();
+//                .until(ExpectedConditions.visibilityOf(computeEngineButton))
+//                .click();
 
-        try {
-            Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new FluentWait<>(driver.switchTo().frame(outerFrame))
+                .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))
+                .ignoring(NoSuchElementException.class)
+                .until(ExpectedConditions.visibilityOf(outerFrame));
 
-        return new SearchResultsPage(driver);
+//        computeEngineButton.click();
+//        numberOfInstances.click();
+//        numberOfInstances.sendKeys(instances);
+
+        return this;
     }
 }
