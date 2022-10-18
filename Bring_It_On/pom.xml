@@ -16,6 +16,7 @@
         <aspectj.version>1.9.9.1</aspectj.version>
         <allure-testng.version>2.19.0</allure-testng.version>
     </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
