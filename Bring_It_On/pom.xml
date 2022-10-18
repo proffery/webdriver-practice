@@ -27,6 +27,5 @@
             <version>7.6.1</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-maven-plugin -->
     </dependencies>
 </project>
