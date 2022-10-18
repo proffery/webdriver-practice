@@ -20,7 +20,7 @@ public class PastenbinTests {
 
     @BeforeSuite
     public void browserSetup() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
     }
 
     @Test (priority = 1)
