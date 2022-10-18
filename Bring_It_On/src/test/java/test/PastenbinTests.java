@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import page.PastebinHomePage;
 import page.PastebinSavePastePage;
 
+import java.lang.module.Configuration;
+
 public class PastenbinTests {
     private WebDriver driver;
     private static final String PASTE_CODE = "git config --global user.name  \"New Sheriff in Town\"\n" +

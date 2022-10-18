@@ -14,8 +14,7 @@ public class PriceTest {
     private static final String INSTANCES = "4";
     @BeforeSuite
     public void browserSetup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver = new FirefoxDriver();
     }
 
     @Test
