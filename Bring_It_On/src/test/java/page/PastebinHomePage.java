@@ -1,10 +1,11 @@
 package page;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import waits.CustomConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+
 import java.time.Duration;
 
 public class PastebinHomePage extends PastebinAbstractPage {
@@ -13,17 +14,17 @@ public class PastebinHomePage extends PastebinAbstractPage {
     @FindBy(id = "postform-text")
     private WebElement codeArea;
 
-    @FindBy(xpath = "//*[@id=\"w0\"]/div[5]/div[1]/div[3]/div/span/span[1]/span/span[2]")
-    private WebElement syntaxContainer;
+    @FindBy(xpath = "//label[text()='Syntax Highlighting:']/..//span[@role='presentation']")
+    private WebElement bashOpen;
 
-    @FindBy(xpath = "/html/body/span[2]/span/span[2]/ul/li[2]/ul/li[1]")
-    private WebElement bashButton;
+    @FindBy(xpath = "//strong[text()='------ POPULAR LANGUAGES -------']/..//li[text()='Bash']")
+    private WebElement bashChoose;
 
     @FindBy(id = "select2-postform-expiration-container")
-    private WebElement expContainer;
+    private WebElement tenMinOpen;
 
-    @FindBy(xpath = "/html/body/span[2]/span/span[2]/ul/li[3]")
-    private WebElement tenMinButton;
+    @FindBy(xpath = "//li[text()='10 Minutes']")
+    private WebElement tenMinChoose;
 
     @FindBy(id = "postform-name")
     private WebElement pasteName;
@@ -37,20 +38,22 @@ public class PastebinHomePage extends PastebinAbstractPage {
 
     public PastebinHomePage openPage() {
         driver.get(HOMEPAGE_URL);
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(CustomConditions.jQueryAJAXsCompleted());
+        driver.manage().window().maximize();
         return this;
     }
 
     public PastebinSavePastePage savePaste(String pasteCode, String pasteTitleName) {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(codeArea));
+        new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))
+                .ignoring(NoSuchElementException.class)
+                .until(ExpectedConditions.visibilityOf(codeArea))
+                .sendKeys(pasteCode);
 
-        codeArea.sendKeys(pasteCode);
-        syntaxContainer.click();
-        bashButton.click();
-        expContainer.click();
-        tenMinButton.click();
+        bashOpen.click();
+        bashChoose.click();
+        tenMinOpen.click();
+        tenMinChoose.click();
         pasteName.sendKeys(pasteTitleName);
         submitButton.click();
 
