@@ -29,7 +29,7 @@ public class PastebinHomePage extends PastebinAbstractPage {
     @FindBy(id = "postform-name")
     private WebElement pasteName;
 
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//button[text()='Create New Paste']")
     private WebElement submitButton;
 
     public PastebinHomePage(WebDriver driver) {

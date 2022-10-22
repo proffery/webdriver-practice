@@ -28,11 +28,11 @@ public class PastebinHomePage {
                 .sendKeys(pasteText);
         waitForElementLocatedBy(driver, By.id("select2-postform-expiration-container"))
                 .click();
-        waitForElementLocatedBy(driver, By.xpath("/html/body/span[2]/span/span[2]/ul/li[3]"))
+        waitForElementLocatedBy(driver, By.xpath("//li[text()='10 Minutes']"))
                 .click();
         waitForElementLocatedBy(driver, By.id("postform-name"))
                 .sendKeys(pasteName);
-        waitForElementLocatedBy(driver, By.xpath("//*[@id=\"w0\"]/div[5]/div[1]/div[10]/button"))
+        waitForElementLocatedBy(driver, By.xpath("//button[text()='Create New Paste']"))
                 .click();
         return this;
     }

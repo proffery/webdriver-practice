@@ -21,8 +21,7 @@ public class PastenbinTests {
 
     @BeforeSuite
     public void browserSetup() {
-        driver = new FirefoxDriver();
-        driver.manage().deleteAllCookies();
+        driver = new ChromeDriver();
     }
 
     @Test (priority = 1)
