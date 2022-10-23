@@ -2,21 +2,24 @@ package test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import page.AbstractPage;
 import page.CleanCalculatorPage;
 import page.CloudHomePage;
 import page.PostPage;
+
+import java.time.Duration;
 
 public class CalculatorTest {
     private WebDriver driver;
     private static final String SEARCH_REQUEST = "Google Cloud Platform Pricing Calculator";
     private static final String INSTANCES = "4";
 
-    @BeforeSuite
+    @BeforeTest
     public void browserSetup() {
         driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
     @Test
@@ -37,10 +40,10 @@ public class CalculatorTest {
         Assert.assertTrue(costOnPage.contains(costInMail));
     }
 
-    @AfterSuite()
+    @AfterTest()
     public void browserTearDown() {
+        driver.close();
         driver.quit();
-        driver = null;
     }
 
 }

@@ -17,7 +17,6 @@ public class CloudHomePage extends AbstractPage {
 
     public CloudHomePage openPage() {
         driver.get(HOMEPAGE_URL);
-        driver.manage().window().maximize();
         return this;
     }
 
