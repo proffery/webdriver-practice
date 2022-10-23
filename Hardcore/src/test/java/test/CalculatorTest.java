@@ -39,10 +39,10 @@ public class CalculatorTest {
         Assert.assertTrue(costOnPage.contains(costInMail));
     }
 
-//    @AfterTest()
-//    public void browserTearDown() {
-//        driver.close();
-//        driver.quit();
-//    }
+    @AfterTest()
+    public void browserTearDown() {
+        driver.close();
+        driver.quit();
+    }
 
 }
