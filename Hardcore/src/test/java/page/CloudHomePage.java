@@ -26,9 +26,8 @@ public class CloudHomePage extends AbstractPage {
                 .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))
                 .ignoring(NoSuchElementException.class)
-                 .until(ExpectedConditions.visibilityOf(searchArea))
-                 .sendKeys(searchRequest, Keys.ENTER);
-
+                .until(ExpectedConditions.visibilityOf(searchArea))
+                .sendKeys(searchRequest, Keys.ENTER);
         return new SearchResultsPage(driver);
     }
 }

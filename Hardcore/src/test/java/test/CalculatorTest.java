@@ -24,10 +24,10 @@ public class CalculatorTest {
         String calcPageWindow = driver.getWindowHandle();
         String postEmail = new CloudHomePage(driver)
                 .openPage()
-                 .searchPricingCalculator(SEARCH_REQUEST)
-                 .openCalcPage()
-                 .redirectionToActualFrame()
-                 .fillCalcForm(INSTANCES)
+                .searchPricingCalculator(SEARCH_REQUEST)
+                .openCalcPage()
+                .redirectionToActualFrame()
+                .fillCalcForm(INSTANCES)
                 .createPostTab()
                 .goToPostPage()
                 .getEmail();

@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import java.time.Duration;
 
 public class PostPage extends AbstractPage{
-    private static final String POSTPAGE_URL = "https://yopmail.com/en/";
+    private static final String POST_PAGE_URL = "https://yopmail.com/en/";
+    private static final String POST_FRAME = "ifmail";
     @FindBy (xpath = "//div[@class='txtlien']/b[contains(text(),'Random')]")
     private WebElement randomEmail;
     @FindBy (xpath = "//div[@id='egen']")
@@ -32,19 +33,18 @@ public class PostPage extends AbstractPage{
         throw new RuntimeException();
     }
     public PostPage goToPostPage() {
-        driver.navigate().to(POSTPAGE_URL);
+        driver.navigate().to(POST_PAGE_URL);
         return this;
     }
 
     public String getPriceFromEmail() {
         checkInboxButton.click();
         refreshButton.click();
-        return new FluentWait<>(driver.switchTo().frame("ifmail"))
+        return new FluentWait<>(driver.switchTo().frame(POST_FRAME))
                 .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))
                 .ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.visibilityOf(costFromMail)).getText();
-
     }
 
     public String getEmail() {
@@ -56,5 +56,4 @@ public class PostPage extends AbstractPage{
         driver.switchTo().window(windowHandle);
         return new CleanCalculatorPage(driver);
     }
-
 }

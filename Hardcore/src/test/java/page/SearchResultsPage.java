@@ -30,7 +30,6 @@ public class SearchResultsPage extends AbstractPage {
                 .ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.visibilityOf(calcInResults))
                 .click();
-
         return new PricingCalculatorPage(driver);
     }
 

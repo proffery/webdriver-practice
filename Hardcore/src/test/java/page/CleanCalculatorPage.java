@@ -14,24 +14,24 @@ public class CleanCalculatorPage extends AbstractPage {
     private WebElement softwareOpen;
 
     @FindBy(xpath = "//md-option/*[contains(text(),'Free: Debian,')]")
-    private WebElement softwareChoise;
+    private WebElement softwareChoose;
 
     @FindBy(xpath = "//md-select[@placeholder='VM Class']/md-select-value/span[@class='md-select-icon']")
     private WebElement regularOpen;
     @FindBy(xpath = "//md-option/div[text()='Regular']")
-    private WebElement regularChoise;
+    private WebElement regularChoose;
 
     @FindBy(xpath = "//md-select[@name='series']/md-select-value/span[@class='md-select-icon']")
     private WebElement seriesOpen;
 
     @FindBy(xpath = "//md-option[@value='n1']")
-    private WebElement seriesChoise;
+    private WebElement seriesChoose;
 
     @FindBy(xpath = "//md-select[@placeholder='Instance type']/md-select-value/span[@class='md-select-icon']")
     private WebElement machineTypeOpen;
 
     @FindBy(xpath = "//md-option[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']/div")
-    private WebElement machineTypeChoise;
+    private WebElement machineTypeChoose;
 
     @FindBy(xpath = "//md-checkbox[@ng-model='listingCtrl.computeServer.addGPUs']/div[@class='md-container md-ink-ripple']")
     private WebElement addGpu;
@@ -40,31 +40,31 @@ public class CleanCalculatorPage extends AbstractPage {
     private WebElement gpuTypeOpen;
 
     @FindBy(xpath = "//md-option[@value='NVIDIA_TESLA_P100']/div")
-    private WebElement gpuTypeChoise;
+    private WebElement gpuTypeChoose;
 
     @FindBy(xpath = "//md-select[starts-with(@aria-label,'Number of GPUs')]")
     private WebElement numberOfGpuOpen;
 
     @FindBy(xpath = "//md-option[@ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]' and @value ='1']")
-    private WebElement numberOfGpuChoise;
+    private WebElement numberOfGpuChoose;
 
     @FindBy(xpath = "//md-select[starts-with(@aria-label,'Datacenter location')]//span[@class='md-select-icon']")
     private WebElement locationOpen;
 
     @FindBy(xpath = "//md-select-menu[@class='md-overflow']//md-option[@value='europe-west3']")
-    private WebElement locationChoise;
+    private WebElement locationChoose;
 
     @FindBy(xpath = "//div[@ng-if=\"listingCtrl.checkLocalSsdAvailibility('computeServer')\"]//md-select[starts-with(@aria-label,'Local SSD')]//span[@class='md-select-icon']")
     private WebElement ssdOpen;
 
     @FindBy(xpath = "//md-option[@ng-repeat='item in listingCtrl.dynamicSsd.computeServer']/div[contains(text(),'2x375 GB')]")
-    private WebElement ssdChoise;
+    private WebElement ssdChoose;
 
     @FindBy(xpath = "//md-select[starts-with(@aria-label,'Committed usage')]//span[@class='md-select-icon']")
     private WebElement usageOpen;
 
     @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(),'1 Year')]")
-    private WebElement usageChoise;
+    private WebElement usageChoose;
 
     @FindBy(xpath = "//button[starts-with(@ng-disabled,'ComputeEngineForm.$invalid')]")
     private WebElement addButton;
@@ -80,7 +80,6 @@ public class CleanCalculatorPage extends AbstractPage {
 
     @FindBy(xpath = "//button[contains(text(),'Send Email')]")
     private WebElement sendEmailButton;
-    private static final String FIELDS_COMPARE_RESULT = "//md-list-item/div[starts-with(@class,'md-list-item-text ng-binding')]";
 
     public CleanCalculatorPage(WebDriver driver) {
         super(driver);
@@ -96,24 +95,24 @@ public class CleanCalculatorPage extends AbstractPage {
         computeEngineButton.click();
         numberOfInstances.sendKeys(instances);
         softwareOpen.click();
-        softwareChoise.click();
+        softwareChoose.click();
         regularOpen.click();
-        regularChoise.click();
+        regularChoose.click();
         seriesOpen.click();
-        seriesChoise.click();
+        seriesChoose.click();
         machineTypeOpen.click();
-        machineTypeChoise.click();
+        machineTypeChoose.click();
         locationOpen.click();
-        locationChoise.click();
+        locationChoose.click();
         addGpu.click();
         gpuTypeOpen.click();
-        gpuTypeChoise.click();
+        gpuTypeChoose.click();
         numberOfGpuOpen.click();
-        numberOfGpuChoise.click();
+        numberOfGpuChoose.click();
         ssdOpen.click();
-        ssdChoise.click();
+        ssdChoose.click();
         usageOpen.click();
-        usageChoise.click();
+        usageChoose.click();
         addButton.click();
         return this;
     }
