@@ -24,6 +24,7 @@ public class PostPage extends AbstractPage{
     @FindBy (xpath = "//td/*[starts-with(text(),'USD')]")
     private WebElement costFromMail;
 
+    private final By inboxIframe = By.xpath("//iframe[@id='ifinbox']");
     public PostPage(WebDriver driver) {
         super(driver);
 
@@ -40,6 +41,16 @@ public class PostPage extends AbstractPage{
     public String getPriceFromEmail() {
         checkInboxButton.click();
         refreshButton.click();
+        while (true) {
+            if (!driver.findElement(inboxIframe).isDisplayed()) {
+                driver.switchTo().defaultContent();
+                refreshButton.click();
+            }
+            else {
+                driver.switchTo().defaultContent();
+                break;
+            }
+        }
         return new FluentWait<>(driver.switchTo().frame(POST_FRAME))
                 .withTimeout(Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .pollingEvery(Duration.ofSeconds(POLLING_TIMEOUT_SECONDS))

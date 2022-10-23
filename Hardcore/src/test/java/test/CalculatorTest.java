@@ -3,7 +3,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import page.AbstractPage;
 import page.CleanCalculatorPage;
 import page.CloudHomePage;
 import page.PostPage;
@@ -40,10 +39,10 @@ public class CalculatorTest {
         Assert.assertTrue(costOnPage.contains(costInMail));
     }
 
-    @AfterTest()
-    public void browserTearDown() {
-        driver.close();
-        driver.quit();
-    }
+//    @AfterTest()
+//    public void browserTearDown() {
+//        driver.close();
+//        driver.quit();
+//    }
 
 }
